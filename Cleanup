@@ -2,3 +2,14 @@ get-childitem * -Recurse | Where-Object {$_.directory -like "*2019"}| Move-Item 
 
 Get-Childitem * -Include *.Json -Recurse | Remove-Item
 
+ls *.* -recurse | get-filehash | group -property hash | where { $_.count -gt 1 } | % {$_.group|select -skip 1} | del
+
+# ls *.* -recurse             # get all files in the current folder and all subfolders
+# get-filehash                # calculate the file hash for all files
+# group -property hash        # group them by the hash value
+# where { $_.count -gt 1 }    # select those groups with more than 1 item
+# % {                         # for all groups
+#    $_.group |              # output the group content, which are the files
+#    select -skip 1          # select all but the first file 
+#   }                        # (we don't want to delete all of them right?)
+# del */            

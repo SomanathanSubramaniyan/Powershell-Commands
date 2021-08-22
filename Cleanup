@@ -1,0 +1,4 @@
+get-childitem * -Recurse | Where-Object {$_.directory -like "*2019"}| Move-Item -Destination "Photos from 2019New"
+
+Get-Childitem * -Include *.Json -Recurse | Remove-Item
+
